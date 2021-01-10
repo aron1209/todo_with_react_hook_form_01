@@ -3,10 +3,10 @@ import { useForm } from "react-hook-form";
 
 const Form = ({ addTodo }) => {
   const { register, handleSubmit, reset, errors } = useForm();
-  // const [value, setValue] = useState("");
+
   const err = (data) => {
     addTodo(data.value);
-    // setValue("");
+
     reset();
   };
   return (
