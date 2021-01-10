@@ -2,22 +2,26 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 
 const Form = ({ addTodo }) => {
-  const { register, handleSubmit } = useForm();
-  const [value, setValue] = useState("");
-  const err = (e) => {
-    !value ? alert("Please input text") : addTodo(value);
-    setValue("");
+  const { register, handleSubmit, reset, errors } = useForm();
+  // const [value, setValue] = useState("");
+  const err = (data) => {
+    addTodo(data.value);
+    // setValue("");
+    reset();
   };
   return (
     <form onSubmit={handleSubmit(err)}>
       <label>Todo入力</label>
       <input
         type='text'
-        value={value}
+        // value={value}
         ref={register({ required: true })}
-        onChange={(e) => {
-          setValue(e.target.value);
-        }}></input>
+        name='value'
+        // onChange={(e) => {
+        //   setValue(e.target.value);
+        // }}
+      ></input>
+      {errors.value && <span>Error : Please input the text</span>}
     </form>
   );
 };
